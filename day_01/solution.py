@@ -11,7 +11,7 @@ def find_three(numbers):
         if x + y + z == 2020:
           return [x, y, z]
 
-with open("input.nlist", "r") as f:
+with open("input", "r") as f:
   numbers = [int(i) for i in f.readlines()]
   x1, y1 = find_two(numbers)
   print(f"Part one: {x1} * {y1} = {x1 * y1}")
