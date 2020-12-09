@@ -7,19 +7,11 @@ re_bags = re.compile(r"(\d*) ([a-z ]+) bags?")
 
 def parse(line: str) -> tuple:
     head = re_rule.match(line)
-    name, constraints = head.groups()
-    constraints = (
-        None
-        if constraints == None
-        else {
-            k: int(v)
-            for v, k in [
-                re_bags.match(constraint).groups()
-                for constraint in constraints.split(", ")
-            ]
-        }
-    )
-    return (name, constraints)
+    name, bags = head.groups()
+    if bags is None:
+        return (name, bags)
+    bags = [re_bags.match(bag).groups() for bag in bags.split(", ")]
+    return (name, {k: int(v) for v, k in bags})
 
 
 def contains(needle: str, haystack: dict, rules: dict) -> bool:
@@ -52,8 +44,7 @@ with open("input", "r") as f:
         bag for bag, rule in rules.items() if contains("shiny gold", rule, rules)
     ]
 
-    print(len(golden_bags))
+    print(f"Part one: {len(golden_bags)} bags can contain a shiny gold bag")
 
-    shiny_gold = rules["shiny gold"]
-    print(shiny_gold)
-    print(count_bags(shiny_gold, rules))
+    count = count_bags(rules["shiny gold"], rules)
+    print(f"Part one: {count} bags are contained in a shiny gold bag")
