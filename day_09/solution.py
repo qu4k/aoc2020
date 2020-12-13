@@ -23,4 +23,4 @@ with open("input", "r") as f:
     print(f"Part one: {first} is the first invalid number")
 
     summands = find_summands(num, first)
-    print(max(summands) + min(summands))
+    print(f"Part two: {max(summands) + min(summands)} is the encryption weakness")

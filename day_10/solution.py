@@ -30,7 +30,7 @@ with open("input", "r") as f:
     jumps = []
     for x, y in pairwise(adapters):
         jumps.append(y - x)
-    print(jumps.count(1) * jumps.count(3))
+    print(f"Part one: {jumps.count(1) * jumps.count(3)} 1-jolt jumps * 3-jolt jumps")
 
     @memoize
     def explore(n: int) -> int:
@@ -43,4 +43,4 @@ with open("input", "r") as f:
                 possibilities += explore(n + i + 1)
         return possibilities
 
-    print(explore(0))
+    print(f"Part two: {explore(0)} distinct arrangements")

@@ -62,11 +62,11 @@ with open("input", "r") as f:
     while changed:
         frame, changed = sim_1(frame)
 
-    print(sum(row.count(O) for row in frame))
+    print(f"Part one: {sum(row.count(O) for row in frame)} seats occupied")
 
     frame = [row[:] for row in grid]
     changed = True
     while changed:
         frame, changed = sim_2(frame)
 
-    print(sum(row.count(O) for row in frame))
+    print(f"Part two: {sum(row.count(O) for row in frame)} seats occupied")
