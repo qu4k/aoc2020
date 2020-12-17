@@ -1,9 +1,12 @@
 import copy
 
+from itertools import product
+
 N, F, O = (None, 0, 1)
 W, H = (0, 0)
 
-directions = [(0, 1), (1, 0), (0, -1), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
+directions = list(product([-1, 0, 1], [-1, 0, 1]))
+directions.remove((0, 0))
 
 
 def sim_1(grid: list) -> (list, bool):
