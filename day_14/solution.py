@@ -1,5 +1,6 @@
 import re
-import itertools
+
+from itertools import product
 
 re_mask = re.compile(r"mask = ([0-9X]+)")
 re_edit = re.compile(r"mem\[(\d+)\] = (\d+)")
@@ -26,7 +27,7 @@ def mask_addr(mask: list, addr: int) -> list:
     addr = [
         [0, 1] if m == "X" else ([1] if m == 1 else [a]) for a, m in zip(addr, mask)
     ]
-    return [bitarray(a) for a in list(itertools.product(*addr))]
+    return [bitarray(a) for a in list(product(*addr))]
 
 
 def execute(lines: list, edit_addr=False, edit_val=False) -> dict:
