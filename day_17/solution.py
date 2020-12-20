@@ -3,21 +3,10 @@ from itertools import product
 import numpy as np
 
 
-def pad(array) -> np.ndarray:
-    reference = np.zeros([i + 2 for i in np.shape(array)], dtype=np.bool)
-    offsets = [1] * len(np.shape(array))
-    result = np.zeros(reference.shape, dtype=np.bool)
-    insert = [
-        slice(offsets[dim], offsets[dim] + array.shape[dim])
-        for dim in range(array.ndim)
-    ]
-    result[tuple(insert)] = array
-    return result
-
-
 def simulate(state: np.ndarray, directions: list, cycles: int) -> int:
+    dim = len(np.shape(state))
     for _ in range(cycles):
-        state = pad(state)
+        state = np.pad(state, [(1, 1) for _ in range(dim)], "constant")
         shape = np.shape(state)
         modif = np.copy(state)
         for coord in product(*[range(s) for s in shape]):
